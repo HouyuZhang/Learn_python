@@ -4,10 +4,7 @@ Created on Tue May 22 20:22:45 2018
 
 @author: Administrator
 """
-Description = '''
-This scripts can help you calculate motif change given differential peaks.
-NOTE:you should provide a file formatted as 'peak_name'	'chr'	'start'	'end' for reference peaks in the working dir.
-'''
+Description = ''
 Copyright = ''
 
 
@@ -53,7 +50,7 @@ def process_file(args):
         for diffpeak_file in glob.glob(args.strain_name +'*_500.txt' ):
             dp_name =diffpeak_file.lstrip(args.strain_name).rstrip('_500.txt')
             dp_dict = {}
-            dp = open(diffpeak_file) 
+            dp = csv.reader(diffpeak_file) 
             next(dp)
             
             for dp_line in dp:
@@ -86,7 +83,7 @@ def main():
     parser.add_argument('--motif_dir','-m', action = 'store', type=str, dest = 'motif_dir',required=True,default = './',
                         help = 'a directory contains homer calculated motif files')
     parser.add_argument('--diffpeak_dir','-p',action = 'store', type=str, dest = 'diffpeak_dir',required=True,default = './',
-                        help = 'a directory contains DiffBind result diffpeak file')
+                        help = 'a directory contains DiffBind result fiffpeak file')
     parser.add_argument('--strain','-s', action = 'store', type=str, dest = 'strain_name',required=True,
                         help = 'a directory contains featurecount result peakcount file')
     args = parser.parse_args()
